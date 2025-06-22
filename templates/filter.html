@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %} Filter Page {%endblock%}
+{% block content %}
+    <h1>Filters</h1>
+    <p>{{sometext |upper}}</p>
+    <p>{{sometext |lower}}</p>
+    <p>{{sometext |capitalize}}</p>
+    <p>{{sometext |title}}</p>
+    <p>{{sometext |length}}</p>
+    <p>{{sometext |replace('w', 'W')}}</p>
+    <p>{{sometext |striptags}}</p>
+    <p>{{sometext |truncate(10)}}</p>
+    <p>{{sometext |truncate(10, true)}}</p>
+    <p>{{sometext |truncate(10, false, '...')}}</p>
+    <p>{{sometext |reversed_filter}}</p>
+    
+    
+    
+{% endblock %}

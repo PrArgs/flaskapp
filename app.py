@@ -1,35 +1,26 @@
-from flask import Flask, make_response, request, Response
+from flask import Flask,render_template, redirect, url_for
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 @app.route('/')
-
 def index():
-    return "<h1>Hello, World!</h1>"
+    mylist = [1,2,3,4,5]
+    return render_template('index.html', mylist=mylist)
 
-@app.route('/hello')
-def hello():
-    response = make_response("Hello, World\n")
-    response.status_code = 200
-    response.headers['Content-Type'] = 'text/plain'
-    return response
 
-@app.route('/great/<name>')
-def great(name):
-    return f"Hello, {name}"
+@app.route('/filter')
+def filter():
+    sometext = "hello world"
+    return render_template('filter.html', sometext=sometext)
 
-@app.route('/add/<int:num1>/<int:num2>')
-def add(num1, num2):
-    return f"The sum of {num1} and {num2} is {num1 + num2}"
+@app.route('/redirect_endpoint')
+def redirect_endpoint():
+    return redirect(url_for('filter'))
 
-@app.route('/handle_url_params')
-def handle_url_params():
-    if request.args.get('greating') and request.args.get('name'):
-        greating = request.args['greating']
-        name = request.args.get('name')
-        return f"{greating}, {name}"
-    else:
-        return "Please provide a greating and a name"
+@app.template_filter('reversed_filter')
+def reverses_string(s):
+    return s[::-1]
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5555, debug=True)
