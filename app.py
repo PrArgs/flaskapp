@@ -1,26 +1,24 @@
-from flask import Flask,render_template, redirect, url_for
+import pandas as pd
+from flask import Flask,render_template, request, redirect, url_for
 
 app = Flask(__name__, template_folder='templates')
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    mylist = [1,2,3,4,5]
-    return render_template('index.html', mylist=mylist)
+    if request.method == 'GET':
+        return render_template('index.html')
+    elif request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        if username == 'neuralnine' and password == 'password':
+            return 'Success'
+        else:
+            return 'Failure'
 
-
-@app.route('/filter')
-def filter():
-    sometext = "hello world"
-    return render_template('filter.html', sometext=sometext)
-
-@app.route('/redirect_endpoint')
-def redirect_endpoint():
-    return redirect(url_for('filter'))
-
-@app.template_filter('reversed_filter')
-def reverses_string(s):
-    return s[::-1]
+@app.route('/file_upload', methods=['GET', 'POST'])
+def file_upload():
+    return ""
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5555, debug=True)
+    app.run(host='0.0.0.0', debug=True)
