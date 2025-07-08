@@ -2,8 +2,6 @@
 {% block title %} Index Page {%endblock%}
 
 {% block content %}
-    <h1>Hello World</h1>
-
-    <a href="#" class="btn btn-primary">Button Text </a>
-
+    <h1>Download</h1>
+    <a href="{{url_for('download', filename=filename)}}">Download File</a>
 {% endblock %}
