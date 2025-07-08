@@ -3,14 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Default Value{%endblock%}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}">
 </head>
 <body>
-    {% block content %}
-    <form method="POST">
-      <input type="text" name="username">
-      <input type="password" name="password">
-      <input type="submit">
-    </form>
-    {% endblock %}
+    {% block content %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js')}}"></script>
 </body>
 </html>
